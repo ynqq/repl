@@ -11,10 +11,10 @@ const App = {
       outputMode: query.get('om') || 'preview',
       defaultVueRuntimeURL: import.meta.env.PROD
         ? undefined
-        : `${location.origin}/src/vue-dev-proxy`,
+        : undefined,
       defaultVueServerRendererURL: import.meta.env.PROD
         ? undefined
-        : `${location.origin}/src/vue-server-renderer-dev-proxy`
+        : undefined
     })
 
     watchEffect(() => history.replaceState({}, '', store.serialize()))
@@ -38,7 +38,7 @@ const App = {
       h(Repl, {
         store,
         // layout: 'vertical',
-        ssr: true,
+        ssr: false,
         sfcOptions: {
           script: {
             // inlineTemplate: false

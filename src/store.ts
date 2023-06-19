@@ -13,7 +13,8 @@ const defaultMainFile = 'App.vue'
 
 const welcomeCode = `
 <script setup>
-import { ref } from 'vue'
+const { createTextVNode: _createTextVNode, resolveComponent: _resolveComponent, withCtx: _withCtx, createVNode: _createVNode, toDisplayString: _toDisplayString, createElementVNode: _createElementVNode, vModelText: _vModelText, withDirectives: _withDirectives, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock } = window.parent.Vue
+const { ref } = window.parent.Vue
 
 const msg = ref('Hello World!')
 </script>

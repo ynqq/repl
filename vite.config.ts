@@ -19,12 +19,18 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     lib: {
+      name: 'vueRepl',
       entry: './src/index.ts',
-      formats: ['es'],
-      fileName: () => 'vue-repl.js'
+      // formats: ['es'],
+      // fileName: () => 'vue-repl.js'
     },
     rollupOptions: {
-      external: ['vue', 'vue/compiler-sfc']
+      external: ['vue'],
+      output: {
+        globals: {
+          'vue': 'Vue',
+        }
+      }
     }
   }
 })

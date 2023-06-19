@@ -1,27 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue SFC Playground</title>
-    <style>
-      body {
-        margin: 0;
-      }
-      .vue-repl {
-        height: 100vh;
-      }
-    </style>
 
-    <script type="module">
-      import { createApp } from 'vue'
-      import { Repl } from './dist/vue-repl'
-      import './dist/style.css'
-      createApp(Repl).mount('#app')
-    </script>
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue SFC Playground</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .vue-repl {
+      height: 100vh;
+    }
+  </style>
+  <link rel="stylesheet" href="./dist/style.css">
+  <script src="https://unpkg.com/vue@3.3.4/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/ant-design-vue@2.2.8/dist/antd.min.js"></script>
+  <script src="./dist/repl.umd.js"></script>
+
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    var initStyle = (src) => {
+      return new Promise((resolve, reject) => {
+        const sc = document.createElement("link");
+        sc.rel = "stylesheet";
+        sc.href = src;
+        document.body.appendChild(sc);
+        sc.onload = () => {
+          resolve();
+        };
+        sc.onerror = () => {
+          reject();
+        };
+      });
+    };
+  </script>
+  <script>
+    window.onload = () => {
+      const { Repl } = vueRepl
+      const { createApp } = Vue
+      // window.parent.initStyle('https://unpkg.com/ant-design-vue@2.2.8/dist/antd.min.css')
+      // window.parent.initStyle("./form/style.css");
+      const app = createApp(Repl)
+      app.use(antd)
+      app.mount('#app')
+
+      // window.parent.Vue.getCurrentInstance()?.appContext.app.use(window.parent.antd)
+      // <a-button type="primary">123</a-button>
+
+    }
+  </script>
+</body>
+
 </html>

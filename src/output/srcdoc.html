@@ -46,6 +46,10 @@
 							let { script: scripts } = ev.data.args
 							if (typeof scripts === 'string') scripts = [scripts]
 
+
+							const scriptEl = document.createElement('script')
+							scriptEl.src = 'https://unpkg.com/vue@3.3.4/dist/vue.global.js'
+							document.head.appendChild(scriptEl)
 							for (const script of scripts) {
 								const scriptEl = document.createElement('script')
 								scriptEl.setAttribute('type', 'module')

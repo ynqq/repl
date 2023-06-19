@@ -223,9 +223,7 @@ async function updatePreview() {
     // if main file is a vue file, mount it.
     if (mainFile.endsWith('.vue')) {
       codeToEval.push(
-        `import { ${
-          isSSR ? `createSSRApp` : `createApp`
-        } as _createApp } from "vue"
+        `const { createApp: _createApp } = window.parent.Vue
         const _mount = () => {
           const AppComponent = __modules__["${mainFile}"].default
           AppComponent.name = 'Repl'
@@ -234,7 +232,7 @@ async function updatePreview() {
             app.config.unwrapInjectedRef = true
           }
           app.config.errorHandler = e => console.error(e)
-          app.mount('#app')
+          app.mount(document.querySelector('#app'))
         }
         if (window.__ssr_promise__) {
           window.__ssr_promise__.then(_mount)
